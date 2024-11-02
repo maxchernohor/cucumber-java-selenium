@@ -21,7 +21,7 @@ jobs:
         run: docker run -v ${{ github.workspace }}/target:/app/target my-java-app mvn test
 
       - name: Upload Cucumber Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: cucumber-report
           path: target/cucumber-reports/
