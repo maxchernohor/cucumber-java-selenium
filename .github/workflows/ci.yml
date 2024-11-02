@@ -1,4 +1,4 @@
-name: Java CI
+name: Run Cucumber Tests
 
 on:
   push:
@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build Docker image
         run: docker build -t my-java-app .
 
       - name: Run Docker container
-        run: docker run -v ${{ github.workspace }}/target:/source/target my-java-app
+        run: docker run -v ${{ github.workspace }}/target:/app/target --user $(id -u):$(id -g) my-java-app
 
       - name: Upload Cucumber Report
         uses: actions/upload-artifact@v3
