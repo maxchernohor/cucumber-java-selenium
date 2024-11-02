@@ -33,7 +33,7 @@ public class SimpleGenericProductPage_Actions {
 
         // Wait for the count to update (you might need to add an explicit wait here)
         try {
-            Thread.sleep(2000); // Simple wait for demonstration purposes
+            Thread.sleep(4000); // Simple wait for demonstration purposes
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

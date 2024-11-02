@@ -34,134 +34,15 @@ public class CustomWebDriverManager {
     /**
      * Private constructor to initialize WebDriver and related instances.
      */
-//    public CustomWebDriverManager() {
-//        driver = initDriver();
-//        Duration duration4 = Duration.ofSeconds(Config.TIMEOUT);
-//        driverWait = (new WebDriverWait(driver, duration4));
-//        element = null;
-//        elements = null;
-//        select = null;
-//    }
-//
-//    /**
-//     * Singleton instance retrieval.
-//     */
-//    public static CustomWebDriverManager getInstance() {
-//        if (instance == null) {
-//            instance = new CustomWebDriverManager();
-//        }
-//        return instance;
-//    }
-//
-//    /**
-//     * Initializes the WebDriver based on the selected driver configuration.
-//     */
-//    private static WebDriver initDriver() {
-//
-//        if (Config.SELECTED_DRIVER.equals(Constants.CHROME_DRIVER)) {
-//
-//            Map<String, String> prefs = new HashMap<>();
-//            prefs.put("safebrowsing.enabled", "false"); // Bypass warning message, keep file anyway (for .exe, .jar, etc.)
-//
-//            ChromeOptions options = new ChromeOptions();
-//
-//            if (Config.HEADLESS) {
-//                options.addArguments("--headless");
-//            }
-//            options.addArguments("--disable-notifications"); //disables 3rd party notifications
-//            options.addArguments("--disable-extensions"); //disables 3rd party extensions
-//            options.addArguments("--no-sandbox");
-//            options.addArguments("--start-maximized");
-//            options.addArguments("--window-size=1920,1080");
-//            options.addArguments("--disable-dev-shm-usage");
-//            options.addArguments("--verbose");
-//            options.addArguments("--remote-allow-origins=*");
-//            options.addArguments("--ignore-ssl-errors=yes");
-//            options.addArguments("--ignore-certificate-errors");
-//            options.addArguments("--disable-dev-shm-usage");
-//            options.addArguments("test-type");
-//            options.setExperimentalOption("prefs", prefs);
-//            WebDriverManager.chromedriver().setup();
-//            WebDriver driver = new ChromeDriver(options);
-//            driver.manage().window().maximize();
-//            return driver;
-//
-//        } else if (Config.SELECTED_DRIVER.equals(Constants.FIREFOX_DRIVER)) {
-//
-//            FirefoxOptions options = new FirefoxOptions();
-//            options.addArguments("--headless");
-//            WebDriverManager.firefoxdriver().setup();
-//            WebDriver driver = new FirefoxDriver(options);
-//            driver.manage().window().maximize();
-//            return driver;
-//
-//        } else if (Config.SELECTED_DRIVER.equals(Constants.IE_DRIVER)) {
-//
-//            InternetExplorerOptions options = new InternetExplorerOptions();
-//            WebDriverManager.iedriver().setup();
-//            WebDriver driver = new InternetExplorerDriver(options);
-//            driver.manage().window().maximize();
-//
-//            // Create the DesiredCapability object of InternetExplorer
-//            //DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//
-//            // Settings to Accept the SSL Certificate in the Capability object
-//            //capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-//
-//            // driver.get("URL for which certificate error is coming");
-//            driver.get("https://tst-apply.educationplannerbc.ca/account/create" + "/account/login");
-//
-//        } else if (Config.SELECTED_DRIVER.equals(Constants.EDGE_DRIVER)) {
-//
-//            EdgeOptions options = new EdgeOptions();
-//
-//            if (Config.HEADLESS) {
-//                options.addArguments("--headless");
-//            }
-//            options.addArguments("--disable-notifications"); //disables 3rd party notifications
-//            options.addArguments("--disable-extensions"); //disables 3rd party extensions
-//            options.addArguments("--no-sandbox");
-//            options.addArguments("--window-size=1920,1080");
-////			options.addArguments("--kiosk"); // full screen for not headless run
-//            options.addArguments("--disable-dev-shm-usage");
-//            options.addArguments("--verbose");
-//            options.addArguments("--remote-allow-origins=*");
-//            options.addArguments("--ignore-ssl-errors=yes");
-//            options.addArguments("--ignore-certificate-errors");
-//            options.addArguments("--disable-dev-shm-usage");
-//            WebDriverManager.iedriver().setup();
-//            WebDriver driver = new EdgeDriver(options);
-//            driver.manage().window();
-//            return driver;
-//        }
-//
-//        return driver;
-//    }
-//
-//    public static void resetInstance() {
-//        instance = null;
-//    }
-//
-//    public static WebDriver getDriver() {
-//        return getInstance().driver;
-//    }
-//
-//    public static WebDriverWait getDriverWait() {
-//        return getInstance().driverWait;
-//    }
-//}
-
-    // web driver objects
-
-    /**
-     * Private constructor to initialize WebDriver and related instances.
-     */
     public CustomWebDriverManager() {
         driver = initDriver();
-        Duration duration = Duration.ofSeconds(Config.TIMEOUT);
-        driverWait = new WebDriverWait(driver, duration);
+        Duration duration4 = Duration.ofSeconds(Config.TIMEOUT);
+        driverWait = (new WebDriverWait(driver, duration4));
+        element = null;
+        elements = null;
+        select = null;
     }
-
+//
     /**
      * Singleton instance retrieval.
      */
@@ -176,30 +57,84 @@ public class CustomWebDriverManager {
      * Initializes the WebDriver based on the selected driver configuration.
      */
     private static WebDriver initDriver() {
-        Map<String, String> prefs = new HashMap<>();
-        prefs.put("safebrowsing.enabled", "false"); // Bypass warning message, keep file anyway (for .exe, .jar, etc.)
 
-        ChromeOptions options = new ChromeOptions();
+        if (Config.SELECTED_DRIVER.equals(Constants.CHROME_DRIVER)) {
 
-        if (Config.HEADLESS) {
+            Map<String, String> prefs = new HashMap<>();
+            prefs.put("safebrowsing.enabled", "false"); // Bypass warning message, keep file anyway (for .exe, .jar, etc.)
+
+            ChromeOptions options = new ChromeOptions();
+
+            if (Config.HEADLESS) {
+                options.addArguments("--headless");
+            }
+            options.addArguments("--disable-notifications"); //disables 3rd party notifications
+            options.addArguments("--disable-extensions"); //disables 3rd party extensions
+            options.addArguments("--no-sandbox");
+            options.addArguments("--start-maximized");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--verbose");
+            options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--ignore-ssl-errors=yes");
+            options.addArguments("--ignore-certificate-errors");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("test-type");
+            options.setExperimentalOption("prefs", prefs);
+            WebDriverManager.chromedriver().setup();
+            WebDriver driver = new ChromeDriver(options);
+            driver.manage().window().maximize();
+            return driver;
+
+        } else if (Config.SELECTED_DRIVER.equals(Constants.FIREFOX_DRIVER)) {
+
+            FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--headless");
+            WebDriverManager.firefoxdriver().setup();
+            WebDriver driver = new FirefoxDriver(options);
+            driver.manage().window().maximize();
+            return driver;
+
+        } else if (Config.SELECTED_DRIVER.equals(Constants.IE_DRIVER)) {
+
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            WebDriverManager.iedriver().setup();
+            WebDriver driver = new InternetExplorerDriver(options);
+            driver.manage().window().maximize();
+
+            // Create the DesiredCapability object of InternetExplorer
+            //DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+
+            // Settings to Accept the SSL Certificate in the Capability object
+            //capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+
+            // driver.get("URL for which certificate error is coming");
+            driver.get("https://tst-apply.educationplannerbc.ca/account/create" + "/account/login");
+
+        } else if (Config.SELECTED_DRIVER.equals(Constants.EDGE_DRIVER)) {
+
+            EdgeOptions options = new EdgeOptions();
+
+            if (Config.HEADLESS) {
+                options.addArguments("--headless");
+            }
+            options.addArguments("--disable-notifications"); //disables 3rd party notifications
+            options.addArguments("--disable-extensions"); //disables 3rd party extensions
+            options.addArguments("--no-sandbox");
+            options.addArguments("--window-size=1920,1080");
+//			options.addArguments("--kiosk"); // full screen for not headless run
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--verbose");
+            options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--ignore-ssl-errors=yes");
+            options.addArguments("--ignore-certificate-errors");
+            options.addArguments("--disable-dev-shm-usage");
+            WebDriverManager.iedriver().setup();
+            WebDriver driver = new EdgeDriver(options);
+            driver.manage().window();
+            return driver;
         }
-        options.addArguments("--disable-notifications"); //disables 3rd party notifications
-        options.addArguments("--disable-extensions"); //disables 3rd party extensions
-        options.addArguments("--no-sandbox");
-        options.addArguments("--start-maximized");
-        options.addArguments("--window-size=1920,1080");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--verbose");
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--ignore-ssl-errors=yes");
-        options.addArguments("--ignore-certificate-errors");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("test-type");
-        options.setExperimentalOption("prefs", prefs);
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+
         return driver;
     }
 
@@ -214,4 +149,5 @@ public class CustomWebDriverManager {
     public static WebDriverWait getDriverWait() {
         return getInstance().driverWait;
     }
+
 }

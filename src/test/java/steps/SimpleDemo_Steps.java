@@ -58,14 +58,20 @@ public class SimpleDemo_Steps {
 
     @When("I click on white sandals")
     public void i_click_on_white_sandals() throws InterruptedException {
-        simpleCatalogPage_actions.clickOnWhiteSandal();
-//        common_actions.clickOnElementByText("White Sandals");
+//        simpleCatalogPage_actions.clickOnWhiteSandal();
+        common_actions.clickOnElementByXpathJS("//h3[text()='White sandals']");
     }
 
     @When("I click on {string}")
-    public void i_click_on(String str) throws InterruptedException {
-        common_actions.clickOnElementByText(str);
+    public void i_click_on_item(String item) {
+        simpleCatalogPage_actions.clickOnItem(item);
     }
+
+    @When("I click on add to cart {string}")
+    public void i_click_on_add_to_cart_item(String item) {
+        simpleCatalogPage_actions.clickOnAddToCart(item);
+    }
+
 
     @Then("I navigated to white sandals page")
     public void i_navigated_to__white_sandals_page() {
