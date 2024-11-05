@@ -24,6 +24,7 @@ jobs:
         id: run-docker
         run: |
           docker run --name my-java-app-container my-java-app
+          docker exec my-java-app-container ls /app/target # Debugging step to list directory contents
           docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
 
       - name: Check for test failures
