@@ -19,8 +19,9 @@ jobs:
 
       - name: Run Docker container
         id: run-docker
-        run: docker run my-java-app
-        continue-on-error: true
+        run: |
+          docker run --name my-java-app-container my-java-app
+          docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
 
       - name: Check for test failures
         if: ${{ failure() }}
@@ -32,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-report
-          path: target/cucumber-reports/
+          path: ./target/cucumber-reports
