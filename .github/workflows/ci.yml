@@ -24,7 +24,8 @@ jobs:
 
       - name: Check for test failures
         if: ${{ failure() }}
-        run: echo "WARNING: Some tests failed. Please check the report."
+        run: |
+          echo "WARNING: Some tests failed. Please check the report."
 
       - name: Upload Cucumber Report
         if: ${{ always() }}
