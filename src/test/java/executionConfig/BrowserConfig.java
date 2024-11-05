@@ -11,8 +11,8 @@ public class BrowserConfig {
     private static final Properties properties = new Properties();
     private static final String PROPERTIES_FILE = "config.properties"; // Path relative to project root
     private static final int DEFAULT_TIMEOUT_IN_SECONDS = 30;
-    private static final String DEFAULT_BROWSER_NAME = "edge"; // Set a default browser name
-    private static final String DEFAULT_HEADLESS = "false";
+    private static final String DEFAULT_BROWSER_NAME = "chrome"; // Set a default browser name
+    private static final String DEFAULT_HEADLESS = "true";
 
     static {
         try (FileInputStream input = new FileInputStream(Paths.get(PROPERTIES_FILE).toFile())) {
