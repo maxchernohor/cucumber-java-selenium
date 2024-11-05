@@ -17,6 +17,9 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-java-app .
 
+      - name: Create target directory
+        run: mkdir -p target/cucumber-reports
+
       - name: Run Docker container
         id: run-docker
         run: |
