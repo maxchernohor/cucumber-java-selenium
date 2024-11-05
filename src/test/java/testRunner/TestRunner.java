@@ -13,8 +13,12 @@ import io.cucumber.junit.CucumberOptions;
         // Specifies the package containing the step definitions
         glue = {"steps"},
 
-        // Specifies the format of the output reports
-        plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json"},
+        // Specifies the format of the output reports and their location
+        plugin = {
+                "pretty",
+                "html:target/cucumber-reports/cucumber.html",
+                "json:target/cucumber-reports/cucumber.json"
+        },
 
         // If true, checks that every step in the feature files has a corresponding step definition without actually running the tests
         dryRun = false,
