@@ -17,15 +17,17 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-java-app .
 
-      - name: Create target directory
-        run: mkdir -p target/cucumber-reports
+      - name: Run Docker container in detached mode
+        run: docker run -d --name my-java-app-container my-java-app tail -f /dev/null
 
-      - name: Run Docker container
-        id: run-docker
-        run: |
-          docker run --name my-java-app-container my-java-app
-          docker exec my-java-app-container ls /app/target/cucumber-reports # Debugging step to list directory contents
-          docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
+      - name: Execute tests inside the running container
+        run: docker exec my-java-app-container ./<your-test-command>
+
+      - name: Verify Cucumber Reports
+        run: docker exec my-java-app-container ls /app/target/cucumber-reports
+
+      - name: Copy Cucumber Reports to host
+        run: docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
 
       - name: Check for test failures
         if: ${{ failure() }}
@@ -38,3 +40,8 @@ jobs:
         with:
           name: cucumber-report
           path: ./target/cucumber-reports
+
+      - name: Stop and remove Docker container
+        run: |
+          docker stop my-java-app-container
+          docker rm my-java-app-container
