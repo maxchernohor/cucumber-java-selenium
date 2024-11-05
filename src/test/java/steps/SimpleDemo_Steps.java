@@ -7,18 +7,18 @@ import actions.SimpleCatalogPage_Actions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import utils.ConfigReader;
+import executionConfig.ConfigReader;
 import utils.Hooks;
 
 import static org.junit.Assert.fail;
 
 public class SimpleDemo_Steps {
-    private Common_Actions common_actions;
-    private SimpleHomePage_Actions simpleHomePage_actions;
-    private SimpleCatalogPage_Actions simpleCatalogPage_actions;
-    private SimpleGenericProductPage_Actions simpleGenericProductPage_actions;
-    private ConfigReader configReader;
-    private String baseUrl;
+    private final Common_Actions common_actions;
+    private final SimpleHomePage_Actions simpleHomePage_actions;
+    private final SimpleCatalogPage_Actions simpleCatalogPage_actions;
+    private final SimpleGenericProductPage_Actions simpleGenericProductPage_actions;
+    private final ConfigReader configReader;
+    private final String baseUrl;
 
     public SimpleDemo_Steps(Hooks hooks, SimpleHomePage_Actions simpleHomePage_actions, SimpleCatalogPage_Actions simpleCatalogPage_actions, SimpleGenericProductPage_Actions simpleGenericProductPage_actions) {
         this.common_actions = new Common_Actions(hooks);
@@ -89,7 +89,7 @@ public class SimpleDemo_Steps {
         simpleGenericProductPage_actions.addToCart();
     }
 
-    @Then("the cart count should increase by one")
+    @Then("I click on Add to cart and cart count should increase by one")
     public void the_cart_count_should_increase_by_one() {
         simpleGenericProductPage_actions.validateCartCountIncreased();
     }

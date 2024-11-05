@@ -14,8 +14,7 @@ Feature: Simple Demo Site
     Given I scroll to the bottom
     When I click on white sandals
     Then I navigated to white sandals page
-    When I click on add to cart sandals
-    Then the cart count should increase by one
+    Then I click on Add to cart and cart count should increase by one
 
   @P2
   Scenario Outline: Navigate to Catalog Page and click on item
@@ -23,7 +22,7 @@ Feature: Simple Demo Site
     When I click on Catalog Button
     Then I navigated to Catalog Page
     Given I scroll to the bottom
-    When I click on "<item>"
+    Then I click on "<item>"
     Examples:
       | item         |
       | White sandals|

@@ -4,8 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.CustomWebDriverManager;
-import utils.Hooks;
+import executionConfig.CustomWebDriverManager;
 
 public class SimpleHomePage_Elements {
 

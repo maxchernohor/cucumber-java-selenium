@@ -1,57 +1,22 @@
 package actions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
+import executionConfig.BrowserConfig;
+import executionConfig.CustomWebDriverManager;
 import org.openqa.selenium.*;
-import utils.Config;
-import utils.ConfigReader;
-import utils.Constants;
-import utils.CustomWebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Hooks;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class Common_Actions {
-    private WebDriver driver;
-    private int defaultSleepBeforeAction = 0;
+    private final WebDriver driver;
+    private final int defaultSleepBeforeAction = 0;
 
     // Retrieve the application username and password from the environment variables
-    private String appUSERNAME = System.getenv("USERNAME_APP");
-    private String appPASSWORD = System.getenv("PASSWORD_APP");
-
-    static ConfigReader configReader = new ConfigReader();
-
-    @Before(order = 0)
-    public void setUp() {
-        driver = CustomWebDriverManager.getDriver();
-        System.out.println("Global Before Hook Executed");
-    }
-
-    @After(order = 1)
-    public void tearDown(Scenario scenario) throws Exception {
-        if (scenario.isFailed()) {
-            // Take Screenshot
-            final byte[] shot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            // Embed into Report
-            scenario.attach(shot, "image/png", scenario.getName());
-        }
-        if (driver != null) {
-            driver.quit();
-        }
-        CustomWebDriverManager.resetInstance();
-        Thread.sleep(1000);
-        System.out.println("Global After Hook Executed");
-    }
-
-    public WebDriver getDriver() {
-        return this.driver;
-    }
-
+    private final String appUSERNAME = System.getenv("USERNAME_APP");
+    private final String appPASSWORD = System.getenv("PASSWORD_APP");
 
     public Common_Actions(Hooks hooks) {
         this.driver = hooks.getDriver();
@@ -71,16 +36,17 @@ public class Common_Actions {
 
     public void openLoginByEnv() throws Exception {
         WebDriver driver = CustomWebDriverManager.getDriver();
-        if (Config.ENVIROMENT.equals(Constants.DEV)) {
-            driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-            String url = configReader.getProperty("dev.url");
+        String environment = System.getProperty("environment", "dev"); // Default to "dev" if not set
+
+        if ("dev".equalsIgnoreCase(environment)) {
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+            String url = BrowserConfig.getEnvironmentUrl("dev");
             driver.get(url);
-        } else if (Config.ENVIROMENT.equals(Constants.TST)) {
-            String url = configReader.getProperty("test.url");
+        } else if ("tst".equalsIgnoreCase(environment)) {
+            String url = BrowserConfig.getEnvironmentUrl("tst");
             driver.get(url);
         }
     }
-
     public void login() throws Exception {
         System.out.println("Logging in to app via keycloak");
 

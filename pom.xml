@@ -1,165 +1,175 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.template</groupId>
-	<artifactId>cucumber</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>com.template</groupId>
+    <artifactId>cucumber</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Cucumber Template</name>
 
-	<name>Cucumber Template</name>
+    <properties>
+        <junit.version>4.13.2</junit.version>
+        <cucumber.version>7.20.1</cucumber.version>
+        <selenium.version>4.26.0</selenium.version>
+        <cucumber.reporting.version>5.8.2</cucumber.reporting.version>
+        <bonigarcia.version>5.9.2</bonigarcia.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+    </properties>
 
-	<properties>
-		<maven.compiler.release>17</maven.compiler.release>
-		<io.github.bonigarcia.version>5.6.3</io.github.bonigarcia.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+    <dependencies>
+        <!-- JUnit dependency for testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-	</properties>
+        <!-- Cucumber dependencies -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-	<dependencies>
-		<!-- JUnit for testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- Selenium dependency -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v85</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
 
-		<!-- Cucumber dependencies -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>7.14.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>7.14.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-picocontainer</artifactId>
-			<version>7.14.0</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- Reporting dependency -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${cucumber.reporting.version}</version>
+        </dependency>
 
-		<!-- Selenium for browser automation -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.11.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-devtools-v85</artifactId>
-			<version>4.11.0</version>
-		</dependency>
+        <!-- WebDriverManager dependency -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${bonigarcia.version}</version>
+        </dependency>
+    </dependencies>
 
-		<!-- Cucumber reporting -->
-		<dependency>
-			<groupId>net.masterthought</groupId>
-			<artifactId>cucumber-reporting</artifactId>
-			<version>5.7.7</version>
-		</dependency>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                    <exclude>**/*.bat</exclude>
+                    <exclude>**/*.sh</exclude>
+                    <exclude>**/.keystore</exclude>
+                </excludes>
+            </resource>
+        </resources>
 
-		<!-- WebDriverManager for managing browser drivers -->
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>${io.github.bonigarcia.version}</version>
-		</dependency>
-	</dependencies>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<excludes>
-					<exclude>**/*.properties</exclude>
-					<exclude>**/*.bat</exclude>
-					<exclude>**/*.sh</exclude>
-					<exclude>**/.keystore</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<plugins>
-			<!--			<plugin>-->
-			<!--				<groupId>org.apache.maven.plugins</groupId>-->
-			<!--				<artifactId>maven-surefire-plugin</artifactId>-->
-			<!--				<version>3.0.0-M5</version>-->
-			<!--				<configuration>-->
-			<!--					<skipTests>false</skipTests>-->
-			<!--				</configuration>-->
-			<!--			</plugin>-->
-			<!--			<plugin>-->
-			<!--				<groupId>org.apache.maven.plugins</groupId>-->
-			<!--				<artifactId>maven-jar-plugin</artifactId>-->
-			<!--				<version>3.3.0</version>-->
-			<!--				<executions>-->
-			<!--					<execution>-->
-			<!--						<goals>-->
-			<!--							<goal>test-jar</goal>-->
-			<!--						</goals>-->
-			<!--					</execution>-->
-			<!--				</executions>-->
-			<!--			</plugin>-->
-			<!--			<plugin>-->
-			<!--				<artifactId>maven-assembly-plugin</artifactId>-->
-			<!--				<configuration>-->
-			<!--					<archive>-->
-			<!--						<manifest>-->
-			<!--							<mainClass>testRunner.TestRunner</mainClass>-->
-			<!--						</manifest>-->
-			<!--					</archive>-->
-			<!--					<descriptors>-->
-			<!--						<descriptor>src/assembly/test-jar-with-dependencies.xml</descriptor>-->
-			<!--					</descriptors>-->
-			<!--				</configuration>-->
-			<!--				<executions>-->
-			<!--					<execution>-->
-			<!--						<phase>package</phase>-->
-			<!--						<goals>-->
-			<!--							<goal>single</goal>-->
-			<!--						</goals>-->
-			<!--					</execution>-->
-			<!--				</executions>-->
-			<!--			</plugin>-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<compilerVersion>${java.version}</compilerVersion>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<testSource>${maven.compiler.source}</testSource>
-					<testTarget>${maven.compiler.target}</testTarget>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.directory}/libs
-							</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+            <!-- Maven Surefire Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <browser.name>${browser.name}</browser.name>
+                        <browser.headless>${browser.headless}</browser.headless>
+                        <webdriver.timeout>${webdriver.timeout}</webdriver.timeout>
+                    </systemPropertyVariables>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Dependency Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>edge</id>
+            <properties>
+                <browser.name>edge</browser.name>
+                <browser.headless>false</browser.headless>
+                <webdriver.timeout>30</webdriver.timeout>
+            </properties>
+        </profile>
+        <profile>
+            <id>edgeheadless</id>
+            <properties>
+                <browser.name>edge</browser.name>
+                <browser.headless>true</browser.headless>
+                <webdriver.timeout>30</webdriver.timeout>
+            </properties>
+        </profile>
+        <profile>
+            <id>chrome</id>
+            <properties>
+                <browser.name>chrome</browser.name>
+                <browser.headless>false</browser.headless>
+                <webdriver.timeout>30</webdriver.timeout>
+            </properties>
+        </profile>
+        <profile>
+            <id>chromeheadless</id>
+            <properties>
+                <browser.name>chrome</browser.name>
+                <browser.headless>true</browser.headless>
+                <webdriver.timeout>30</webdriver.timeout>
+            </properties>
+        </profile>
+    </profiles>
 </project>

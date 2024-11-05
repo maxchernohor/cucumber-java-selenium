@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CustomWebDriverManager;
+import executionConfig.CustomWebDriverManager;
 import utils.Hooks;
 
 public class SimpleCatalogPage_Actions {
@@ -18,9 +18,10 @@ public class SimpleCatalogPage_Actions {
 
 
     public SimpleCatalogPage_Actions(Hooks hooks) {
-        this.driver = hooks.getDriver();
         CustomWebDriverManager customWebDriverManager = CustomWebDriverManager.getInstance();
         this.wait = customWebDriverManager.getDriverWait();
+        this.driver = customWebDriverManager.getDriver();
+
         simpleCatalogPageElements = new SimpleCatalogPage_Elements(driver);
     }
 

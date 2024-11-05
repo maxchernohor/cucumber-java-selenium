@@ -1,5 +1,6 @@
 package utils;
 
+import executionConfig.CustomWebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,17 +18,21 @@ public class Hooks {
     }
 
     @After(order = 1)
-    public void tearDown(Scenario scenario) throws Exception {
-        if (scenario.isFailed() && driver instanceof TakesScreenshot) {
-            final byte[] shot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(shot, "image/png", scenario.getName());
-        }
+    public void tearDown(Scenario scenario) {
         if (driver != null) {
-            driver.quit();
+            try {
+                // Capture screenshot if the scenario fails
+                if (scenario.isFailed() && driver instanceof TakesScreenshot) {
+                    final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                    scenario.attach(screenshot, "image/png", scenario.getName());
+                }
+            } finally {
+                // Quit the driver to close the browser
+                driver.quit();
+                CustomWebDriverManager.resetInstance();
+                System.out.println("Global After Hook Executed, browser closed.");
+            }
         }
-        CustomWebDriverManager.resetInstance();
-        Thread.sleep(1000);
-        System.out.println("Global After Hook Executed");
     }
 
     public WebDriver getDriver() {

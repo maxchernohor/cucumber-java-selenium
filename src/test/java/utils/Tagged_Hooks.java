@@ -1,5 +1,6 @@
 package utils;
 
+import executionConfig.CustomWebDriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,7 @@ public class Tagged_Hooks {
     private WebDriver driver;
 
     public Tagged_Hooks(Hooks hooks) {
-        this.driver = hooks.getDriver();
+        this.driver = CustomWebDriverManager.getDriver();
     }
 
     @Before(value = "@setCookies", order = 1)
