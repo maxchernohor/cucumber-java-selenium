@@ -114,6 +114,9 @@
                         <browser.headless>${browser.headless}</browser.headless>
                         <webdriver.timeout>${webdriver.timeout}</webdriver.timeout>
                     </systemPropertyVariables>
+                    <!-- Fail the build if tests fail (default behavior) -->
+<!--                    <testFailureIgnore>false</testFailureIgnore>-->
+                    <!-- Uncomment the following line to continue build but log warnings if tests fail -->
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>

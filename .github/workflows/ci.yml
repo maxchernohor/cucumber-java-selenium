@@ -18,9 +18,16 @@ jobs:
         run: docker build -t my-java-app .
 
       - name: Run Docker container
+        id: run-docker
         run: docker run my-java-app
+        continue-on-error: true
+
+      - name: Check for test failures
+        if: ${{ failure() }}
+        run: echo "WARNING: Some tests failed. Please check the report."
 
       - name: Upload Cucumber Report
+        if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-report

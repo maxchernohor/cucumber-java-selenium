@@ -24,12 +24,12 @@ Ensure you have the following installed on your system:
 ### Installing Java 17
 
 1. **Download Java 17:**
-    - Visit the official Oracle website or an open-source alternative like AdoptOpenJDK to download Java 17:
-        - [Oracle JDK 17](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
-        - [AdoptOpenJDK 17](https://adoptopenjdk.net/)
+   - Visit the official Oracle website or an open-source alternative like AdoptOpenJDK to download Java 17:
+      - [Oracle JDK 17](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+      - [AdoptOpenJDK 17](https://adoptopenjdk.net/)
 
 2. **Install Java 17:**
-    - Follow the installation instructions for your Operating System.
+   - Follow the installation instructions for your Operating System.
 
 3. **Verify the Installation:**
     ```bash
@@ -46,11 +46,11 @@ Ensure you have the following installed on your system:
 ### Installing Maven 3.6 or higher
 
 1. **Download Maven:**
-    - Visit the official Maven website to download the latest version:
-        - [Maven Download](https://maven.apache.org/download.cgi)
+   - Visit the official Maven website to download the latest version:
+      - [Maven Download](https://maven.apache.org/download.cgi)
 
 2. **Install Maven:**
-    - Follow the installation instructions for your Operating System.
+   - Follow the installation instructions for your Operating System.
 
 3. **Verify the Installation:**
     ```bash
@@ -154,6 +154,47 @@ public class CustomWebDriverManager {
         // constructor implementation here
     }
 }
+```
+
+## GitHub Actions Workflow
+
+To run tests and upload Cucumber reports using GitHub Actions, use the following configuration:
+
+```yaml
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Install dependencies
+      run: mvn clean install --no-transfer-progress
+
+    - name: Run tests
+      run: mvn test --no-transfer-progress
+
+    - name: Upload Cucumber Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: cucumber-reports
+        path: target/cucumber-reports/*.json
 ```
 
 ## Troubleshooting
