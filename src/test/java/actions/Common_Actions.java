@@ -3,9 +3,9 @@ package actions;
 import executionConfig.BrowserConfig;
 import executionConfig.CustomWebDriverManager;
 import org.openqa.selenium.*;
-import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import utils.Hooks;
 
 import java.time.Duration;
@@ -47,6 +47,7 @@ public class Common_Actions {
             driver.get(url);
         }
     }
+
     public void login() throws Exception {
         System.out.println("Logging in to app via keycloak");
 
@@ -88,7 +89,6 @@ public class Common_Actions {
         System.out.println("Clicked on element with text: " + text);
     }
 
-
     public void clickOnElementByXpathJS(String xpath) throws InterruptedException {
         // Click Next
         sleep(defaultSleepBeforeAction);
@@ -101,9 +101,7 @@ public class Common_Actions {
         js.executeScript("arguments[0].click();", element);
 
         System.out.println("Clicked on element with xpath: " + xpath);
-
     }
-
 
     public void clickOnTagByText(String tag, String containsText) throws InterruptedException {
         sleep(defaultSleepBeforeAction);
@@ -114,7 +112,6 @@ public class Common_Actions {
         element.click();
 
         System.out.println("Clicked on tag: " + tag + " which contains text: " + containsText);
-
     }
 
     public void clickOnElementByXpath(String xpath) throws InterruptedException {
@@ -125,7 +122,6 @@ public class Common_Actions {
         WebElement element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
         element.click();
         System.out.println("Clicked on element by xpath: " + xpath);
-
     }
 
     public void clickOnElementById(String id) throws InterruptedException {
@@ -142,7 +138,6 @@ public class Common_Actions {
     public void clickOnElementByName(String name) throws InterruptedException {
         sleep(defaultSleepBeforeAction);
 
-
         WebDriverWait driverWait = CustomWebDriverManager.getDriverWait();
 
         WebElement element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.name(name)));
@@ -157,7 +152,6 @@ public class Common_Actions {
         WebDriverWait driverWait = CustomWebDriverManager.getDriverWait();
 
         WebElement element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//" + tag + "[@class='" + className + "']")));
-
         element.click();
 
         System.out.println("Clicked on tag: " + tag + " which contains classname: " + className);
@@ -191,7 +185,7 @@ public class Common_Actions {
         } catch (Exception e) {
             result = false;
         }
-        Assert.assertTrue("Text '" + text + "' does not exist on a page.", result);
+        Assert.assertTrue(result, "Text '" + text + "' does not exist on a page.");
     }
 
     public void textShouldNotExist(String text) throws InterruptedException {
@@ -208,13 +202,13 @@ public class Common_Actions {
         } catch (Exception e) {
             result = false;
         }
-        Assert.assertFalse("Unexpected text '" + text + "' exists on a page.", result);
+        Assert.assertFalse(result, "Unexpected text '" + text + "' exists on a page.");
     }
 
     public void elementShouldExist(String tag, String text) {
         WebDriver driver = CustomWebDriverManager.getDriver();
 
-        System.out.println("Validating that element with tag: " + tag + "and text : " + text + " exists");
+        System.out.println("Validating that element with tag: " + tag + " and text : " + text + " exists");
 
         Boolean result = true;
         try {
@@ -223,7 +217,7 @@ public class Common_Actions {
         } catch (Exception e) {
             result = false;
         }
-        Assert.assertTrue(tag + "element with text '" + text + "' does not exist on a page.", result);
+        Assert.assertTrue(result, tag + " element with text '" + text + "' does not exist on a page.");
     }
 
     public WebElement getElementByXpath(String xpath) {
@@ -266,7 +260,6 @@ public class Common_Actions {
         element.sendKeys(inputText);
     }
 
-
     public void inputTextByTagAttributeContainsValue(String tag, String attribute, String containsValue, String inputText) throws InterruptedException {
         sleep(defaultSleepBeforeAction);
 
@@ -289,7 +282,6 @@ public class Common_Actions {
         element.sendKeys(inputText);
     }
 
-
     public void sleep(int seconds) throws InterruptedException {
         Thread.sleep(seconds * 1000);
     }
@@ -300,7 +292,6 @@ public class Common_Actions {
         JavascriptExecutor js1 = (JavascriptExecutor) driver;
         // Scroll down till the bottom of the page
         js1.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-        JavascriptExecutor js2 = (JavascriptExecutor) driver;
         Thread.sleep(1000);
 
         System.out.println("Scrolled to bottom");

@@ -24,7 +24,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 
 WORKDIR /source
 
-COPY features/ ./features/
+COPY src/test/resources/features/ ./features/
 COPY *.properties .
 COPY *.xml .
 COPY *.sh .

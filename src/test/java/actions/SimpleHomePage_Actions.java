@@ -6,11 +6,10 @@ import utils.Hooks;
 
 public class SimpleHomePage_Actions {
 
-    private WebDriver driver;
     SimpleHomePage_Elements simpleHomePage_elements;
 
     public SimpleHomePage_Actions(Hooks hooks) {
-        this.driver = hooks.getDriver();
+        WebDriver driver = hooks.getDriver();
         simpleHomePage_elements = new SimpleHomePage_Elements(driver);
     }
 

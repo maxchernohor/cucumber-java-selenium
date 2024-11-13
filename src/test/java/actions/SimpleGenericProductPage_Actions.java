@@ -5,12 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.Hooks;
-
-import static org.junit.Assert.assertEquals;
+import org.testng.Assert;
 
 public class SimpleGenericProductPage_Actions {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     SimpleGenericProductPage_Elements simpleGenericProductPage_elements;
 
     public SimpleGenericProductPage_Actions(Hooks hooks) {
@@ -43,6 +42,6 @@ public class SimpleGenericProductPage_Actions {
         int updatedCount = Integer.parseInt(updatedCountText);
 
         // Validate that the count has increased by 1
-        assertEquals("Cart count did not increase as expected", initialCount + 1, updatedCount);
+        Assert.assertEquals(initialCount + 1, updatedCount, "Cart count did not increase as expected");
     }
 }

@@ -9,29 +9,30 @@
     <name>Cucumber Template</name>
 
     <properties>
-        <junit.version>4.13.2</junit.version>
+        <testng.version>7.10.2</testng.version>
         <cucumber.version>7.20.1</cucumber.version>
         <selenium.version>4.26.0</selenium.version>
         <cucumber.reporting.version>5.8.2</cucumber.reporting.version>
         <bonigarcia.version>5.9.2</bonigarcia.version>
+        <slf4j.version>1.7.32</slf4j.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
     <dependencies>
-        <!-- JUnit dependency for testing -->
+        <!-- TestNG dependency for testing -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Cucumber dependencies -->
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
+            <artifactId>cucumber-testng</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
@@ -47,7 +48,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium dependency -->
+        <!-- Selenium dependencies -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -71,6 +72,12 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${bonigarcia.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 
@@ -104,19 +111,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <parallel>methods</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
                     <systemPropertyVariables>
                         <browser.name>${browser.name}</browser.name>
                         <browser.headless>${browser.headless}</browser.headless>
                         <webdriver.timeout>${webdriver.timeout}</webdriver.timeout>
                     </systemPropertyVariables>
-                    <!-- Fail the build if tests fail (default behavior) -->
-<!--                    <testFailureIgnore>false</testFailureIgnore>-->
-                    <!-- Uncomment the following line to continue build but log warnings if tests fail -->
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>

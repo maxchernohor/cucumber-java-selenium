@@ -9,8 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import executionConfig.ConfigReader;
 import utils.Hooks;
-
-import static org.junit.Assert.fail;
+import org.testng.Assert;
 
 public class SimpleDemo_Steps {
     private final Common_Actions common_actions;
@@ -46,9 +45,7 @@ public class SimpleDemo_Steps {
         String expectedUrlPart = baseUrl + catalogPath;
         String actualUrl = common_actions.getCurrentPageUrl();
 
-        if (!actualUrl.contains(expectedUrlPart)) {
-            fail("Page did not navigate to the expected catalog page. Expected URL part: " + expectedUrlPart + ", but got: " + actualUrl);
-        }
+        Assert.assertTrue(actualUrl.contains(expectedUrlPart), "Page did not navigate to the expected catalog page. Expected URL part: " + expectedUrlPart + ", but got: " + actualUrl);
     }
 
     @Given("I scroll to the bottom")
@@ -58,7 +55,6 @@ public class SimpleDemo_Steps {
 
     @When("I click on white sandals")
     public void i_click_on_white_sandals() throws InterruptedException {
-//        simpleCatalogPage_actions.clickOnWhiteSandal();
         common_actions.clickOnElementByXpathJS("//h3[text()='White sandals']");
     }
 
@@ -72,16 +68,13 @@ public class SimpleDemo_Steps {
         simpleCatalogPage_actions.clickOnAddToCart(item);
     }
 
-
     @Then("I navigated to white sandals page")
     public void i_navigated_to__white_sandals_page() {
         String whiteSandalsPath = configReader.getProperty("simple.whitesandals.path");
         String expectedUrlPart = baseUrl + whiteSandalsPath;
         String actualUrl = common_actions.getCurrentPageUrl();
 
-        if (!actualUrl.contains(expectedUrlPart)) {
-            fail("Page did not navigate to the expected catalog page. Expected URL part: " + expectedUrlPart + ", but got: " + actualUrl);
-        }
+        Assert.assertTrue(actualUrl.contains(expectedUrlPart), "Page did not navigate to the expected catalog page. Expected URL part: " + expectedUrlPart + ", but got: " + actualUrl);
     }
 
     @When("I click on add to cart sandals")

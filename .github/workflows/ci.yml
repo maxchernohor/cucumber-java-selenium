@@ -21,19 +21,21 @@ jobs:
         id: run-docker
         run: |
           docker run --name my-java-app-container my-java-app
-          docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
-
-      - name: Check for test failures
-        if: ${{ failure() }}
-        run: |
-          echo "WARNING: Some tests failed. Please check the report."
-
-      - name: Upload Cucumber Report
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: cucumber-report
-          path: ./target/cucumber-reports
-
-      - name: Clean up Docker container
-        run: docker rm my-java-app-container || true
+#          docker cp my-java-app-container:/app/target/cucumber-reports ./target/cucumber-reports
+#
+#      - name: Check for test failures
+#        if: ${{ failure() }}
+#        run: |
+#          echo "WARNING: Some tests failed. Please check the report."
+#
+#      - name: Upload Cucumber Report
+#        if: ${{ always() }}
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: cucumber-report
+#          path: ./target/cucumber-reports
+#
+#      - name: Stop and remove Docker container
+#        run: |
+#          docker stop my-java-app-container
+#          docker rm my-java-app-container

@@ -20,8 +20,8 @@ public class CustomWebDriverManager {
     private static CustomWebDriverManager instance = null;
 
     // WebDriver and WebDriverWait objects
-    private WebDriver driver;
-    private WebDriverWait driverWait;
+    private final WebDriver driver;
+    private final WebDriverWait driverWait;
 
     /**
      * Private constructor to initialize WebDriver and related instances.

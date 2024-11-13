@@ -11,16 +11,12 @@ import utils.Hooks;
 
 public class SimpleCatalogPage_Actions {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private final WebDriverWait wait;
     SimpleCatalogPage_Elements simpleCatalogPageElements;
-    Common_Actions common_actions;
-
 
     public SimpleCatalogPage_Actions(Hooks hooks) {
-        CustomWebDriverManager customWebDriverManager = CustomWebDriverManager.getInstance();
-        this.wait = customWebDriverManager.getDriverWait();
-        this.driver = customWebDriverManager.getDriver();
+        this.wait = CustomWebDriverManager.getDriverWait();
+        WebDriver driver = hooks.getDriver();
 
         simpleCatalogPageElements = new SimpleCatalogPage_Elements(driver);
     }

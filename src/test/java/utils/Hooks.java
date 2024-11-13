@@ -1,34 +1,39 @@
 package utils;
 
 import executionConfig.CustomWebDriverManager;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 public class Hooks {
     private WebDriver driver;
 
-    @Before(order = 0)
+    @Before
     public void setUp() {
         driver = CustomWebDriverManager.getDriver();
         System.out.println("Global Before Hook Executed");
     }
 
-    @After(order = 1)
+    @After
     public void tearDown(Scenario scenario) {
         if (driver != null) {
             try {
-                // Capture screenshot if the scenario fails
+                // Capture screenshot if the test fails
                 if (scenario.isFailed() && driver instanceof TakesScreenshot) {
                     final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-                    scenario.attach(screenshot, "image/png", scenario.getName());
+                    // Attach screenshot to the test result (implementation depends on your reporting tool)
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             } finally {
-                // Quit the driver to close the browser
-                driver.quit();
+                try {
+                    driver.quit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 CustomWebDriverManager.resetInstance();
                 System.out.println("Global After Hook Executed, browser closed.");
             }
